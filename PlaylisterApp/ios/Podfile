@@ -19,6 +19,10 @@ target 'PlaylisterApp' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'PlaylisterAppTests' do
     inherit! :complete
     # Pods for testing

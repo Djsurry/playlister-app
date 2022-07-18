@@ -19,6 +19,8 @@ target 'PlaylisterApp' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
   target 'PlaylisterAppTests' do
     inherit! :complete
     # Pods for testing

@@ -8,6 +8,7 @@
 
 import React from 'react';
 import type {Node} from 'react';
+var RNFS = require('react-native-fs');
 import {
   SafeAreaView,
   ScrollView,
@@ -26,6 +27,43 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+async function getSong(pl) {
+  let resp = await Promise.resolve(
+    fetch('http://68.183.196.41:1234/getsong', {headers: {url: pl}}),
+  );
+  return {data: resp.data, url: resp.url};
+}
+function createFile(data) {
+  function makeid(length) {
+    var result = '';
+    var characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+  let path = RNFS.DocumentDirectoryPath + makeid(10);
+  RNFS.writeFile(path, data.data, 'utf8')
+    .then(() => {
+      console.log('FILE WRITTEN!');
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+  return path;
+}
+function cleanupFile(path) {
+  RNFS.unlink(path)
+    .then(() => {
+      console.log('FILE DELETED');
+    })
+    // `unlink` will throw an error, if the item to unlink does not exist
+    .catch(err => {
+      console.log(err.message);
+    });
+}
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (

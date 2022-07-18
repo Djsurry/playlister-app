@@ -17,15 +17,16 @@ import {
   Text,
   useColorScheme,
   View,
+  Button,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Searchbar} from 'react-native-paper';
+import Slider from '@react-native-community/slider';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faBlackboard, faVolumeHigh} from '@fortawesome/free-solid-svg-icons';
+import {faForward} from '@fortawesome/free-solid-svg-icons';
+import {faPause} from '@fortawesome/free-solid-svg-icons';
 
 async function getSong(pl) {
   let resp = await Promise.resolve(
@@ -91,59 +92,62 @@ const Section = ({children, title}): Node => {
 };
 
 const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <View style={styles.background}>
+      <Text style={styles.title}>playlister? i hardly know her (mobile) </Text>
+      <View style={styles.searchrow}>
+        <Searchbar style={styles.searchbar}></Searchbar>
+        <Button style={styles.search} title="search"></Button>
+      </View>
+      <View style={styles.volumerow}>
+        <FontAwesomeIcon
+          style={{color: '#4f5257', marginLeft: 20}}
+          icon={faVolumeHigh}
+          size={40}></FontAwesomeIcon>
+
+        <Slider style={styles.slider}></Slider>
+      </View>
+      <View style={styles.functionButtons}>
+        <Button title="pause/play" style={styles.pause}></Button>
+        <Button title="skip" style={styles.skip}></Button>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  background: {
+    backgroundColor: Colors.darker,
+    height: '100%',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  title: {
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 20,
+    marginVertical: 20,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  searchrow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
-  highlight: {
-    fontWeight: '700',
+  searchbar: {width: '80%'},
+  search: {},
+  skip: {},
+  volumerow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'center',
+    width: '95%',
+    borderRadius: 20,
+    marginVertical: 10,
+    borderColor: 'black',
+    borderWidth: 1,
+  },
+  slider: {margin: 20, width: '80%'},
+  functionButtons: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    alignSelf: 'center',
   },
 });
 

@@ -16,14 +16,7 @@
     "@react-native-community/slider": "^4.2.4",
     "react": "17.0.2",
     "react-native": "0.68.2",
-<<<<<<< HEAD
     "react-native-fs": "^2.20.0"
-=======
-    "react-native-paper": "^4.12.2",
-    "react-native-sound": "^0.11.2",
-    "react-native-svg": "^12.3.0",
-    "react-native-vector-icons": "^9.2.0"
->>>>>>> f98054f19dba08140cfd6b494c5ad17b8ca27446
   },
   "devDependencies": {
     "@babel/core": "7.18.6",

@@ -22,6 +22,7 @@ import {
 
 import {Searchbar} from 'react-native-paper';
 import Slider from '@react-native-community/slider';
+
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBlackboard, faVolumeHigh} from '@fortawesome/free-solid-svg-icons';
@@ -65,31 +66,6 @@ function cleanupFile(path) {
       console.log(err.message);
     });
 }
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
 
 const App: () => Node = () => {
   return (
@@ -108,7 +84,10 @@ const App: () => Node = () => {
         <Slider style={styles.slider}></Slider>
       </View>
       <View style={styles.functionButtons}>
-        <Button title="pause/play" style={styles.pause}></Button>
+        <Button
+          onPress={() => {}}
+          title="pause/play"
+          style={styles.pause}></Button>
         <Button title="skip" style={styles.skip}></Button>
       </View>
     </View>
